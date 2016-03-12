@@ -74,7 +74,7 @@ TCPsocket SDLNet_TCP_Open(IPaddress *ip)
 
         /* Connect to the remote host */
         if ( connect(sock->channel, (struct sockaddr *)&sock_addr,
-                sizeof(sock_addr)) == SOCKET_ERROR ) {
+                sizeof(sock_addr)) == SOCKET_ERROR && errno != EINPROGRESS ) {
             SDLNet_SetError("Couldn't connect to remote host");
             goto error_return;
         }
